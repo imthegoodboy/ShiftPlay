@@ -22,7 +22,7 @@ const UserSchema = new Schema<IUser>({
   streakDays: { type: Number, default: 0 },
   lastSwapDate: { type: String, default: null },
   createdAt: { type: Date, default: Date.now },
-});
+}, { collection: 'shiftplay_users' });
 
 export default mongoose.model<IUser>('User', UserSchema);
 

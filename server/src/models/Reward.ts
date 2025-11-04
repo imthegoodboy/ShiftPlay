@@ -16,7 +16,7 @@ const RewardSchema = new Schema<IReward>({
   rewardData: { type: Schema.Types.Mixed },
   claimed: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
-});
+}, { collection: 'shiftplay_rewards' });
 
 export default mongoose.model<IReward>('Reward', RewardSchema);
 

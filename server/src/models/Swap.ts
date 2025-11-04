@@ -24,7 +24,7 @@ const SwapSchema = new Schema<ISwap>({
   xpEarned: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
   completedAt: { type: Date },
-});
+}, { collection: 'shiftplay_swaps' });
 
 export default mongoose.model<ISwap>('Swap', SwapSchema);
 

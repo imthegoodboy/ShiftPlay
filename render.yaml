@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: shiftplay-api
+    env: node
+    rootDir: server
+    buildCommand: npm ci && npm run build
+    startCommand: node dist/index.js
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: SIDESHIFT_API_URL
+        value: https://sideshift.ai/api/v2
+      - key: CLIENT_ORIGIN
+        sync: false
+      - key: MONGO_URI
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+
+  - type: static
+    name: shiftplay-web
+    buildCommand: npm ci && npm run build
+    publishPath: dist
+    autoDeploy: true
+    envVars:
+      - key: VITE_API_BASE
+        value: /api
+    routes:
+      - type: rewrite
+        source: /api/(.*)
+        destination: https://shiftplay-api.onrender.com/api/$1
+
